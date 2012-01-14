@@ -1,0 +1,20 @@
+name: J2MC_Harass
+main: to.joe.j2mc.harass.J2MC_Harass
+version: 0.0prealpha
+website: http://forums.joe.to
+author: J2 Minecraft Plugin Team
+description: Harassment module.
+depend: J2MC_Core
+commands:
+  harass:
+    description: Harrases player, toggle based.
+    usage: |
+            /harass player
+  ban:
+    description: Slays player
+    usage: |
+            /slay player
+  slap:
+    description: Slaps player with specified force
+    usage: |
+            /slap player force
