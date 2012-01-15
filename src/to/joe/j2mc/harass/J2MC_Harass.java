@@ -19,6 +19,7 @@ import to.joe.j2mc.harass.command.CraftualHarassmentPanda;
 import to.joe.j2mc.harass.command.HarassCommand;
 import to.joe.j2mc.harass.command.SlapCommand;
 import to.joe.j2mc.harass.command.SlayCommand;
+import to.joe.j2mc.harass.command.SmiteCommand;
 
 public class J2MC_Harass extends JavaPlugin {
 
@@ -34,6 +35,7 @@ public class J2MC_Harass extends JavaPlugin {
 		this.getCommand("harass").setExecutor(new HarassCommand(this));
 		this.getCommand("slap").setExecutor(new SlapCommand(this));
 		this.getCommand("slay").setExecutor(new SlayCommand(this));
+		this.getCommand("smite").setExecutor(new SmiteCommand(this));
 		
 		Bukkit.getServer().getPluginManager().registerEvent(Type.BLOCK_PLACE, new BListener(), Priority.Normal, this);
 		Bukkit.getServer().getPluginManager().registerEvent(Type.BLOCK_BREAK, new BListener(), Priority.Normal, this);

@@ -10,7 +10,7 @@ commands:
     description: Harrases player, toggle based.
     usage: |
             /harass player
-  ban:
+  slay:
     description: Slays player
     usage: |
             /slay player
@@ -18,3 +18,5 @@ commands:
     description: Slaps player with specified force
     usage: |
             /slap player force
+  smite:
+    description: Strikes player down with lightning
