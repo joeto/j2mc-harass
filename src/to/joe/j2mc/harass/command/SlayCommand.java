@@ -1,6 +1,7 @@
 package to.joe.j2mc.harass.command;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -29,6 +30,7 @@ public class SlayCommand extends MasterCommand{
 				player.sendMessage(ChatColor.RED + e.getMessage());
 			}
             if (target != null) {
+            	target.setGameMode(GameMode.SURVIVAL);
                 target.damage(9001);
                 target.sendMessage(ChatColor.RED + "You have been slayed");
                 J2MC_Manager.getCore().adminAndLog(ChatColor.RED + player.getName() + " slayed " + target.getName());

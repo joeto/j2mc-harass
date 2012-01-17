@@ -4,7 +4,6 @@ version: 0.0prealpha
 website: http://forums.joe.to
 author: J2 Minecraft Plugin Team
 description: Harassment module.
-depend: J2MC_Core
 commands:
   harass:
     description: Harrases player, toggle based.
@@ -20,3 +19,5 @@ commands:
             /slap player force
   smite:
     description: Strikes player down with lightning
+    usage: |
+            /smite player

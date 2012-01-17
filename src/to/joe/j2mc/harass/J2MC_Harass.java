@@ -1,9 +1,10 @@
 package to.joe.j2mc.harass;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event.Type;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -23,15 +24,24 @@ import to.joe.j2mc.harass.command.SmiteCommand;
 
 public class J2MC_Harass extends JavaPlugin {
 
+	public static ArrayList<String> harassees;
+	
 	@Override
 	public void onDisable() {
 		J2MC_Manager.getLog().info("Harass module disabled");
 	}
 
+	CraftualHarassmentPanda methods = new CraftualHarassmentPanda();
+	
 	@Override
 	public void onEnable() {
-		J2MC_Manager.getLog().info("Harass module enabled");
-
+		harassees = new ArrayList<String>();
+		this.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+			public void run(){
+			J2MC_Manager.getLog().info("Harass module enabled");
+			methods.restartManager();
+			}
+		}, 1);
 		this.getCommand("harass").setExecutor(new HarassCommand(this));
 		this.getCommand("slap").setExecutor(new SlapCommand(this));
 		this.getCommand("slay").setExecutor(new SlayCommand(this));
@@ -45,7 +55,7 @@ public class J2MC_Harass extends JavaPlugin {
 
 	// Listeners after this
 
-	CraftualHarassmentPanda methods = new CraftualHarassmentPanda();
+	
 
 	private class BListener extends BlockListener {
 
@@ -80,7 +90,6 @@ public class J2MC_Harass extends JavaPlugin {
 
 		public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
 			final Player player = event.getPlayer();
-			final String name = player.getName();
 			final String message = event.getMessage();
 			if (!methods.chat(player, message)) {
 				event.setCancelled(true);

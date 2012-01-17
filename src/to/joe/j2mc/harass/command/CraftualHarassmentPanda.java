@@ -23,11 +23,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import to.joe.j2mc.core.J2MC_Manager;
+import to.joe.j2mc.harass.J2MC_Harass;
 
 public class CraftualHarassmentPanda {
 	
 	private Random random = new Random();
-	private ArrayList<String> harassees;
     private final Object sync = new Object();
     String[] pandaLines;
 
@@ -40,7 +40,7 @@ public class CraftualHarassmentPanda {
      */
     public boolean panda(Player player) {
         synchronized (this.sync) {
-            return this.harassees.contains(player.getName().toLowerCase());
+            return J2MC_Harass.harassees.contains(player.getName().toLowerCase());
         }
     }
     
@@ -51,7 +51,7 @@ public class CraftualHarassmentPanda {
      */
     public void remove(String name) {
         synchronized (this.sync) {
-            this.harassees.remove(name.toLowerCase());
+        	J2MC_Harass.harassees.remove(name.toLowerCase());
         }
     }
     
@@ -62,7 +62,7 @@ public class CraftualHarassmentPanda {
      */
     public void harass(String name) {
         synchronized (this.sync) {
-            this.harassees.add(name.toLowerCase());
+        	J2MC_Harass.harassees.add(name.toLowerCase());
         }
     }
 	
@@ -107,7 +107,7 @@ public class CraftualHarassmentPanda {
      * Reset system.
      */
     public void restartManager() {
-        this.harassees = new ArrayList<String>();
+        //this.harassees = new ArrayList<String>();
         try {
             this.pandaLines = this.readDaFile("panda.txt");
         } catch (final Exception e) {
@@ -174,8 +174,8 @@ public class CraftualHarassmentPanda {
         }
 
         J2MC_Manager.getCore().adminAndLog(ChatColor.DARK_AQUA + "[HARASS]BLOCKED: " + player.getName() + ChatColor.WHITE + ": " + message);
-        //final String squawk = this.pandaLines[this.random.nextInt(this.pandaLines.length)];
-        //J2MC_Core.getServer().broadcastMessage(ChatColor.WHITE + "<" + J2MC_Manager.getVisibility().getPlayer(player.getName(), null).getColorName() + ChatColor.WHITE + "> " + squawk);
+        final String squawk = this.pandaLines[this.random.nextInt(this.pandaLines.length)];
+        J2MC_Manager.getCore().getServer().broadcastMessage(ChatColor.WHITE + "<" + player.getName() + ChatColor.WHITE + "> " + squawk);
         //this.j2.irc.messageRelay("<" + player.getName() + "> " + squawk);
 
         return false;

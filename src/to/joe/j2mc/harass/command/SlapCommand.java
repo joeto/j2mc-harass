@@ -10,8 +10,6 @@ import org.bukkit.util.Vector;
 import to.joe.j2mc.core.J2MC_Manager;
 import to.joe.j2mc.core.command.MasterCommand;
 import to.joe.j2mc.core.exceptions.BadPlayerMatchException;
-import to.joe.j2mc.core.exceptions.NoPlayersException;
-import to.joe.j2mc.core.exceptions.TooManyPlayersException;
 import to.joe.j2mc.harass.J2MC_Harass;
 
 public class SlapCommand extends MasterCommand{
