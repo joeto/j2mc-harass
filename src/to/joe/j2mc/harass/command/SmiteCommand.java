@@ -33,6 +33,8 @@ public class SmiteCommand extends MasterCommand {
                 //J2MC_Manager.getPermissions().setPermissions("j2mc.damage.take", true);
                 //this.j2.damage.addToTimer(target.getName());
                 target.getWorld().strikeLightningEffect(target.getLocation());
+                target.damage(20);
+                target.setFireTicks(200);
                 J2MC_Manager.getCore().adminAndLog(ChatColor.RED + sender.getName() + " has zapped " + target.getName());
                 target.sendMessage(ChatColor.RED + "You have been judged");
                 target.getWorld().setStorm(weather);
