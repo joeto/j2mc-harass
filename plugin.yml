@@ -21,3 +21,8 @@ commands:
     description: Strikes player down with lightning
     usage: |
             /smite player
+permissions:
+  j2mc.harass.general:
+    description: gives player access to /slap, /slay and /smite
+  j2mc.harass.abuse:
+    description: gives access to /harass

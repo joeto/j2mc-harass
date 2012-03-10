@@ -20,7 +20,7 @@ public class SlapCommand extends MasterCommand {
 
     @Override
     public void exec(CommandSender sender, String commandName, String[] args, Player player, boolean isPlayer) {
-        if (sender.hasPermission("j2mc.harass.slapper")) {
+        if (sender.hasPermission("j2mc.harass.general")) {
             float force = 0;
             if (args.length < 1) {
                 player.sendMessage(ChatColor.RED + "Usage: /slap player force");
