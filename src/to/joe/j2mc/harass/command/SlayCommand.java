@@ -18,7 +18,7 @@ public class SlayCommand extends MasterCommand {
 
     @Override
     public void exec(CommandSender sender, String commandName, String[] args, Player player, boolean isPlayer) {
-        if (sender.hasPermission("j2mc.harass.general")) {
+        if (sender.hasPermission("j2mc.harass.slay")) {
             if (args.length == 0) {
                 sender.sendMessage(ChatColor.RED + "I can't kill anyone if you don't tell me whom");
                 return;

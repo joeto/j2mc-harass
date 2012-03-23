@@ -1,12 +1,12 @@
 name: J2MC_Harass
 main: to.joe.j2mc.harass.J2MC_Harass
-version: 0.0prealpha
+version: 1.0
 website: http://forums.joe.to
 author: J2 Minecraft Plugin Team
 description: Harassment module.
 commands:
   harass:
-    description: Harrases player, toggle based.
+    description: Harasses player, toggle based.
     usage: |
             /harass player
   slay:
@@ -22,7 +22,18 @@ commands:
     usage: |
             /smite player
 permissions:
-  j2mc.harass.general:
-    description: gives player access to /slap, /slay and /smite
+  j2mc.harass.slap:
+    description: gives access to /slap
+  j2mc.harass.slay:
+    description: gives access to /slay
+  j2mc.harass.smite:
+    description: gives access to /smite
   j2mc.harass.abuse:
     description: gives access to /harass
+  j2mc.harass.admin:
+    description: the big shabang
+    children:
+      j2mc.harass.slap: true
+      j2mc.harass.slay: true
+      j2mc.harass.smite: true
+      j2mc.harass.abuse: true
