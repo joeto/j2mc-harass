@@ -31,11 +31,11 @@ public class HarassCommand extends MasterCommand {
             }
             if (!((J2MC_Harass) this.plugin).isHarassed(target)) {
                 ((J2MC_Harass) this.plugin).harass(target.getName());
-                J2MC_Manager.getCore().adminAndLog(ChatColor.AQUA + "[HARASS] Target Acquired: " + ChatColor.DARK_AQUA + target.getName() + ChatColor.AQUA + ". Thanks, " + player.getName() + "!");
+                J2MC_Manager.getCore().adminAndLog(ChatColor.AQUA + "[HARASS] Target Acquired: " + ChatColor.DARK_AQUA + target.getName() + ChatColor.AQUA + ". Thanks, " + sender.getName() + "!");
                 //this.j2.irc.messageAdmins("[HARASS] Target Acquired: " + target.getName() + ". Thanks, " + playerName + "!");
             } else {
                 ((J2MC_Harass) this.plugin).remove(target.getName());
-                J2MC_Manager.getCore().adminAndLog(ChatColor.AQUA + "[HARASS] Target Removed: " + ChatColor.DARK_AQUA + target.getName() + ChatColor.AQUA + ". Thanks, " + player.getName() + "!");
+                J2MC_Manager.getCore().adminAndLog(ChatColor.AQUA + "[HARASS] Target Removed: " + ChatColor.DARK_AQUA + target.getName() + ChatColor.AQUA + ". Thanks, " + sender.getName() + "!");
                 //this.j2.irc.messageAdmins("[HARASS] Target Removed: " + target.getName() + ". Thanks, " + playerName + "!");
             }
         }

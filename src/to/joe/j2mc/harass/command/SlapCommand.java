@@ -23,7 +23,7 @@ public class SlapCommand extends MasterCommand {
         if (sender.hasPermission("j2mc.harass.slap")) {
             float force = 0;
             if (args.length < 1) {
-                player.sendMessage(ChatColor.RED + "Usage: /slap player force");
+                sender.sendMessage(ChatColor.RED + "Usage: /slap player force");
             } else {
                 if (args.length == 1) {
                     force = 5;
@@ -40,13 +40,13 @@ public class SlapCommand extends MasterCommand {
                 try {
                     target = J2MC_Manager.getVisibility().getPlayer(args[0], null);
                 } catch (final BadPlayerMatchException e) {
-                    player.sendMessage(ChatColor.RED + e.getMessage());
+                    sender.sendMessage(ChatColor.RED + e.getMessage());
                     return;
                 }
                 final Random randomGen = new Random();
                 final Vector newVelocity = new Vector(((randomGen.nextFloat() * 1.5) - 0.75) * force, (randomGen.nextFloat() / 2.5) + (0.4 * force), ((randomGen.nextFloat() * 1.5) - 0.75) * force);
                 target.setVelocity(newVelocity);
-                J2MC_Manager.getCore().adminAndLog(ChatColor.RED + player.getName() + " slapped " + target.getName());
+                J2MC_Manager.getCore().adminAndLog(ChatColor.RED + sender.getName() + " slapped " + target.getName());
             }
         }
     }

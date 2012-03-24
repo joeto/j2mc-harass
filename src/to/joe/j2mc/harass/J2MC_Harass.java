@@ -160,18 +160,18 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
             uhOh[0] = "";
             return uhOh;
         }
-        final BufferedReader rulesBuffer = new BufferedReader(fileReader);
+        final BufferedReader bufferedReader = new BufferedReader(fileReader);
         final List<String> fileLines = new ArrayList<String>();
         String line = null;
         try {
-            while ((line = rulesBuffer.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 fileLines.add(line);
             }
         } catch (final IOException e1) {
             e1.printStackTrace();
         }
         try {
-            rulesBuffer.close();
+            bufferedReader.close();
         } catch (final IOException e) {
             e.printStackTrace();
         }

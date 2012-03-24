@@ -29,14 +29,10 @@ public class SlayCommand extends MasterCommand {
             } catch (final BadPlayerMatchException e) {
                 sender.sendMessage(ChatColor.RED + e.getMessage());
             }
-            if (target != null) {
-                target.setGameMode(GameMode.SURVIVAL);
-                target.damage(9001);
-                target.sendMessage(ChatColor.RED + "You have been slayed");
-                J2MC_Manager.getCore().adminAndLog(ChatColor.RED + sender.getName() + " slayed " + target.getName());
-            } else {
-                sender.sendMessage(ChatColor.RED + "Matches no players");
-            }
+            target.setGameMode(GameMode.SURVIVAL);
+            target.damage(9001);
+            target.sendMessage(ChatColor.RED + "You have been slayed");
+            J2MC_Manager.getCore().adminAndLog(ChatColor.RED + sender.getName() + " slayed " + target.getName());
         }
     }
 }
