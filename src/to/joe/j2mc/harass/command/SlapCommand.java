@@ -20,34 +20,32 @@ public class SlapCommand extends MasterCommand {
 
     @Override
     public void exec(CommandSender sender, String commandName, String[] args, Player player, boolean isPlayer) {
-        if (sender.hasPermission("j2mc.harass.slap")) {
-            float force = 0;
-            if (args.length < 1) {
-                sender.sendMessage(ChatColor.RED + "Usage: /slap player force");
+        float force = 0;
+        if (args.length < 1) {
+            sender.sendMessage(ChatColor.RED + "Usage: /slap player force");
+        } else {
+            if (args.length == 1) {
+                force = 5;
             } else {
-                if (args.length == 1) {
+                force = new Float(args[1]);
+                if (force > 10000) {
+                    force = 10000;
+                }
+                if (force < 0) {
                     force = 5;
-                } else {
-                    force = new Float(args[1]);
-                    if (force > 10000) {
-                        force = 10000;
-                    }
-                    if (force < 0) {
-                        force = 5;
-                    }
                 }
-                Player target = null;
-                try {
-                    target = J2MC_Manager.getVisibility().getPlayer(args[0], null);
-                } catch (final BadPlayerMatchException e) {
-                    sender.sendMessage(ChatColor.RED + e.getMessage());
-                    return;
-                }
-                final Random randomGen = new Random();
-                final Vector newVelocity = new Vector(((randomGen.nextFloat() * 1.5) - 0.75) * force, (randomGen.nextFloat() / 2.5) + (0.4 * force), ((randomGen.nextFloat() * 1.5) - 0.75) * force);
-                target.setVelocity(newVelocity);
-                J2MC_Manager.getCore().adminAndLog(ChatColor.RED + sender.getName() + " slapped " + target.getName());
             }
+            Player target = null;
+            try {
+                target = J2MC_Manager.getVisibility().getPlayer(args[0], null);
+            } catch (final BadPlayerMatchException e) {
+                sender.sendMessage(ChatColor.RED + e.getMessage());
+                return;
+            }
+            final Random randomGen = new Random();
+            final Vector newVelocity = new Vector(((randomGen.nextFloat() * 1.5) - 0.75) * force, (randomGen.nextFloat() / 2.5) + (0.4 * force), ((randomGen.nextFloat() * 1.5) - 0.75) * force);
+            target.setVelocity(newVelocity);
+            J2MC_Manager.getCore().adminAndLog(ChatColor.RED + sender.getName() + " slapped " + target.getName());
         }
     }
 

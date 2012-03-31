@@ -17,26 +17,24 @@ public class SmiteCommand extends MasterCommand {
 
     @Override
     public void exec(CommandSender sender, String commandName, String[] args, Player player, boolean isPlayer) {
-        if (sender.hasPermission("j2mc.harass.smite")) {
-            if (args.length == 0) {
-                sender.sendMessage(ChatColor.RED + "I can't kill anyone if you don't tell me whom");
-                return;
-            }
-            Player target = null;
-            try {
-                target = J2MC_Manager.getVisibility().getPlayer(args[0], null);
-            } catch (final BadPlayerMatchException e) {
-                sender.sendMessage(ChatColor.RED + e.getMessage());
-            }
-            final boolean weather = target.getWorld().isThundering();
-            //J2MC_Manager.getPermissions().setPermissions("j2mc.damage.take", true);
-            //this.j2.damage.addToTimer(target.getName());
-            target.getWorld().strikeLightningEffect(target.getLocation());
-            target.damage(20);
-            target.setFireTicks(200);
-            J2MC_Manager.getCore().adminAndLog(ChatColor.RED + sender.getName() + " has zapped " + target.getName());
-            target.sendMessage(ChatColor.RED + "You have been judged");
-            target.getWorld().setStorm(weather);
+        if (args.length == 0) {
+            sender.sendMessage(ChatColor.RED + "I can't kill anyone if you don't tell me whom");
+            return;
         }
+        Player target = null;
+        try {
+            target = J2MC_Manager.getVisibility().getPlayer(args[0], null);
+        } catch (final BadPlayerMatchException e) {
+            sender.sendMessage(ChatColor.RED + e.getMessage());
+        }
+        final boolean weather = target.getWorld().isThundering();
+        //J2MC_Manager.getPermissions().setPermissions("j2mc.damage.take", true);
+        //this.j2.damage.addToTimer(target.getName());
+        target.getWorld().strikeLightningEffect(target.getLocation());
+        target.damage(20);
+        target.setFireTicks(200);
+        J2MC_Manager.getCore().adminAndLog(ChatColor.RED + sender.getName() + " has zapped " + target.getName());
+        target.sendMessage(ChatColor.RED + "You have been judged");
+        target.getWorld().setStorm(weather);
     }
 }

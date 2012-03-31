@@ -7,20 +7,24 @@ description: Harassment module.
 commands:
   harass:
     description: Harasses player, toggle based.
-    usage: |
-            /harass player
+    usage: /harass player
+    permission: j2mc.harass.harass
+    permission-message: No u
   slay:
     description: Slays player
-    usage: |
-            /slay player
+    usage: /slay player
+    permission: j2mc.harass.slay
+    permission-message: No u
   slap:
     description: Slaps player with specified force
-    usage: |
-            /slap player force
+    usage: /slap player force
+    permission: j2mc.harass.slap
+    permission-message: No u
   smite:
     description: Strikes player down with lightning
-    usage: |
-            /smite player
+    usage:  /smite player
+    permission: j2mc.harass.smite
+    permission-message: No u
 permissions:
   j2mc.harass.slap:
     description: gives access to /slap

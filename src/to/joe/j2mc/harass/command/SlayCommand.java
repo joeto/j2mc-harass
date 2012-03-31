@@ -18,21 +18,19 @@ public class SlayCommand extends MasterCommand {
 
     @Override
     public void exec(CommandSender sender, String commandName, String[] args, Player player, boolean isPlayer) {
-        if (sender.hasPermission("j2mc.harass.slay")) {
-            if (args.length == 0) {
-                sender.sendMessage(ChatColor.RED + "I can't kill anyone if you don't tell me whom");
-                return;
-            }
-            Player target = null;
-            try {
-                target = J2MC_Manager.getVisibility().getPlayer(args[0], null);
-            } catch (final BadPlayerMatchException e) {
-                sender.sendMessage(ChatColor.RED + e.getMessage());
-            }
-            target.setGameMode(GameMode.SURVIVAL);
-            target.damage(9001);
-            target.sendMessage(ChatColor.RED + "You have been slayed");
-            J2MC_Manager.getCore().adminAndLog(ChatColor.RED + sender.getName() + " slayed " + target.getName());
+        if (args.length == 0) {
+            sender.sendMessage(ChatColor.RED + "I can't kill anyone if you don't tell me whom");
+            return;
         }
+        Player target = null;
+        try {
+            target = J2MC_Manager.getVisibility().getPlayer(args[0], null);
+        } catch (final BadPlayerMatchException e) {
+            sender.sendMessage(ChatColor.RED + e.getMessage());
+        }
+        target.setGameMode(GameMode.SURVIVAL);
+        target.damage(9001);
+        target.sendMessage(ChatColor.RED + "You have been slayed");
+        J2MC_Manager.getCore().adminAndLog(ChatColor.RED + sender.getName() + " slayed " + target.getName());
     }
 }
