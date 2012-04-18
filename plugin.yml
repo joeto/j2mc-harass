@@ -25,6 +25,11 @@ commands:
     usage:  /smite player
     permission: j2mc.harass.smite
     permission-message: No u
+  woof:
+    description: Woof
+    usage: /woof player
+    permission: j2mc.harass.woof
+    permission-message: No u
 permissions:
   j2mc.harass.slap:
     description: gives access to /slap
@@ -34,6 +39,8 @@ permissions:
     description: gives access to /smite
   j2mc.harass.abuse:
     description: gives access to /harass
+  j2mc.harass.woof:
+    description: gives access to /woof
   j2mc.harass.admin:
     description: the big shabang
     children:
@@ -41,3 +48,4 @@ permissions:
       j2mc.harass.slay: true
       j2mc.harass.smite: true
       j2mc.harass.abuse: true
+      j2mc.harass.woof: true

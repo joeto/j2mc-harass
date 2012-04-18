@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -21,10 +22,12 @@ import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.inventory.Inventory;
@@ -35,6 +38,7 @@ import to.joe.j2mc.harass.command.HarassCommand;
 import to.joe.j2mc.harass.command.SlapCommand;
 import to.joe.j2mc.harass.command.SlayCommand;
 import to.joe.j2mc.harass.command.SmiteCommand;
+import to.joe.j2mc.harass.command.WoofCommand;
 
 public class J2MC_Harass extends JavaPlugin implements Listener {
 
@@ -44,6 +48,8 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
 
     private final Object sync = new Object();
     private final Random random = new Random();
+    
+    public HashMap<String, ArrayList<Wolf>> wolves = new HashMap<String, ArrayList<Wolf>>();
 
     /**
      * Adds player to harassment list
@@ -89,6 +95,16 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
             event.setCancelled(true);
         }
     }
+    
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        if(wolves.containsKey(event.getEntity().getName())){
+            for(Wolf wolf : wolves.get(event.getEntity())){
+                wolf.damage(9000);
+                wolf.remove();
+            }
+        }
+    }
 
     @Override
     public void onDisable() {
@@ -104,6 +120,7 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
         this.getCommand("slap").setExecutor(new SlapCommand(this));
         this.getCommand("slay").setExecutor(new SlayCommand(this));
         this.getCommand("smite").setExecutor(new SmiteCommand(this));
+        this.getCommand("woof").setExecutor(new WoofCommand(this));
 
         try {
             this.pandaLines = this.fileToArray("panda.txt");
