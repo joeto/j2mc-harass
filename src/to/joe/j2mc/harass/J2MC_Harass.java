@@ -30,6 +30,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -99,7 +100,17 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         if(wolves.containsKey(event.getEntity().getName())){
-            for(Wolf wolf : wolves.get(event.getEntity())){
+            for(Wolf wolf : wolves.get(event.getEntity().getName())){
+                wolf.damage(9000);
+                wolf.remove();
+            }
+        }
+    }
+    
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        if(wolves.containsKey(event.getPlayer().getName())){
+            for(Wolf wolf : wolves.get(event.getPlayer().getName())){
                 wolf.damage(9000);
                 wolf.remove();
             }
