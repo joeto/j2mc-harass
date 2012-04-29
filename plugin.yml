@@ -44,6 +44,7 @@ permissions:
   j2mc.harass.admin:
     description: the big shabang
     children:
+      j2mc.harass.harass: true
       j2mc.harass.slap: true
       j2mc.harass.slay: true
       j2mc.harass.smite: true
