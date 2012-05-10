@@ -147,11 +147,8 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerChat(PlayerChatEvent event) {
         if (this.isHarassed(event.getPlayer())) {
-            final String message = event.getMessage();
-            J2MC_Manager.getCore().adminAndLog(ChatColor.DARK_AQUA + "[HARASS]BLOCKED: " + event.getPlayer().getName() + ChatColor.WHITE + ": " + message);
-            final String squawk = this.pandaLines[this.random.nextInt(this.pandaLines.length)];
-            J2MC_Manager.getCore().getServer().broadcastMessage(ChatColor.WHITE + "<" + event.getPlayer().getName() + ChatColor.WHITE + "> " + squawk);
-            event.setCancelled(true);
+            J2MC_Manager.getCore().adminAndLog(ChatColor.DARK_AQUA + "[HARASS]BLOCKED: " + event.getPlayer().getName() + ChatColor.WHITE + ": " + event.getMessage());
+            event.setMessage(this.pandaLines[this.random.nextInt(this.pandaLines.length)]);
         }
     }
 
