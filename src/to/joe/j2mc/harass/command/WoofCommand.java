@@ -50,6 +50,7 @@ public class WoofCommand extends MasterCommand{
             wlist.add(wolf);
             wolf.setAngry(true);
             wolf.setTarget(target);
+            wolf.damage(0, target);
         }
         plugin.wolves.put(target.getName(), wlist);
     }
