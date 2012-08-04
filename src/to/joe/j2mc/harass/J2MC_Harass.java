@@ -6,15 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.server.EntityChicken;
 import net.minecraft.server.Packet24MobSpawn;
 import net.minecraft.server.Packet60Explosion;
+import net.minecraft.server.Packet62NamedSoundEffect;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -90,7 +89,7 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
             final EntityChicken bawk = new EntityChicken(((CraftWorld) event.getPlayer().getWorld()).getHandle());
             bawk.setLocation(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getYaw());
             final Packet24MobSpawn pack1 = new Packet24MobSpawn(bawk);
-            final Packet60Explosion pack2 = new Packet60Explosion(location.getX(), location.getY(), location.getZ(), 10, new HashSet<Block>());
+            final Packet60Explosion pack2 = new Packet60Explosion(location.getX(), location.getY(), location.getZ(), 10, new ArrayList<Block>(), null);
             ((CraftPlayer) event.getPlayer()).getHandle().netServerHandler.sendPacket(pack1);
             ((CraftPlayer) event.getPlayer()).getHandle().netServerHandler.sendPacket(pack2);
             event.setCancelled(true);
@@ -140,7 +139,21 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
             this.pandaLines[0] = "ololol imma griefer ban me plz";
         }
 
-        Bukkit.getServer().getPluginManager().registerEvents(this, this);
+        this.getServer().getPluginManager().registerEvents(this, this);
+        
+        this.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            
+            @Override
+            public void run() {
+                for (Player player : getServer().getOnlinePlayers()) {
+                    if(isHarassed(player)) {
+                        Packet62NamedSoundEffect footstep = new Packet62NamedSoundEffect("step.grass", player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), 5, 3);
+                        ((CraftPlayer) player).getHandle().netServerHandler.sendPacket(footstep);
+                    }
+                }
+            }
+        }, 100);
+        
         this.getLogger().info("Harass module enabled");
     }
 
