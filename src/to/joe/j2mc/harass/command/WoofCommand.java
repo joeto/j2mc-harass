@@ -46,7 +46,7 @@ public class WoofCommand extends MasterCommand{
         targetInventory.clear();
         final ArrayList<Wolf> wlist = new ArrayList<Wolf>();
         for (int x = 0; x < 10; x++) {
-            final Wolf wolf = (Wolf) target.getWorld().spawnCreature(target.getLocation(), EntityType.WOLF);
+            final Wolf wolf = (Wolf) target.getWorld().spawnEntity(target.getLocation(), EntityType.WOLF);
             wlist.add(wolf);
             wolf.setAngry(true);
             wolf.setTarget(target);
