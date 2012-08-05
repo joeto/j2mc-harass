@@ -27,7 +27,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
@@ -141,7 +141,7 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
 
         this.getServer().getPluginManager().registerEvents(this, this);
         
-        this.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             
             @Override
             public void run() {
@@ -152,13 +152,13 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
                     }
                 }
             }
-        }, 100);
+        }, 100, 100);
         
         this.getLogger().info("Harass module enabled");
     }
 
     @EventHandler
-    public void onPlayerChat(PlayerChatEvent event) {
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
         if (this.isHarassed(event.getPlayer())) {
             J2MC_Manager.getCore().adminAndLog(ChatColor.DARK_AQUA + "[HARASS]BLOCKED: " + event.getPlayer().getName() + ChatColor.WHITE + ": " + event.getMessage());
             event.setMessage(this.pandaLines[this.random.nextInt(this.pandaLines.length)]);
@@ -173,7 +173,9 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
     }
 
     public boolean isHarassed(Player player) {
-        return J2MC_Harass.harassees.contains(player.getName().toLowerCase());
+        synchronized (this.sync) {
+            return J2MC_Harass.harassees.contains(player.getName().toLowerCase());
+        }
     }
 
     /**
