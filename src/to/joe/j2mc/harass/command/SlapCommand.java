@@ -28,8 +28,8 @@ public class SlapCommand extends MasterCommand {
                 force = 5;
             } else {
                 force = new Float(args[1]);
-                if (force > 10000) {
-                    force = 10000;
+                if (force > 100) {
+                    force = 100;
                 }
                 if (force < 0) {
                     force = 5;

@@ -26,6 +26,10 @@ public class WoofCommand extends MasterCommand{
     
     @Override
     public void exec(CommandSender sender, String commandName, String[] args, Player player, boolean isPlayer) {
+        if(args.length > -1){
+            sender.sendMessage(ChatColor.GRAY + "BARK BARK BARK BARK BARK!");
+            return;
+        }
         if (args.length < 1) {
             sender.sendMessage(ChatColor.RED + "Usage: /woof player");
             return;

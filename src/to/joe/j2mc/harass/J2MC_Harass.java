@@ -87,9 +87,9 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
             final Inventory i = event.getPlayer().getInventory();
             i.remove(event.getPlayer().getItemInHand().getType());
             final EntityChicken bawk = new EntityChicken(((CraftWorld) event.getPlayer().getWorld()).getHandle());
-            bawk.setLocation(location.getX(), location.getY(), location.getZ(), location.getPitch(), location.getYaw());
+            bawk.setLocation(location.getX() + 0.5, location.getY(), location.getZ() + 0.5, location.getPitch(), location.getYaw());
             final Packet24MobSpawn pack1 = new Packet24MobSpawn(bawk);
-            final Packet60Explosion pack2 = new Packet60Explosion(location.getX(), location.getY(), location.getZ(), 10, new ArrayList<Block>(), null);
+            final Packet60Explosion pack2 = new Packet60Explosion(location.getX() + 0.5, location.getY() + 0.5, location.getZ() + 0.5, 10, new ArrayList<Block>(), null);
             ((CraftPlayer) event.getPlayer()).getHandle().netServerHandler.sendPacket(pack1);
             ((CraftPlayer) event.getPlayer()).getHandle().netServerHandler.sendPacket(pack2);
             event.setCancelled(true);
