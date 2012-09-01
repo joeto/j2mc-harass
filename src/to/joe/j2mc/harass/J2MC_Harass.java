@@ -29,6 +29,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -92,6 +93,13 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
             final Packet60Explosion pack2 = new Packet60Explosion(location.getX() + 0.5, location.getY() + 0.5, location.getZ() + 0.5, 10, new ArrayList<Block>(), null);
             ((CraftPlayer) event.getPlayer()).getHandle().netServerHandler.sendPacket(pack1);
             ((CraftPlayer) event.getPlayer()).getHandle().netServerHandler.sendPacket(pack2);
+            event.setCancelled(true);
+        }
+    }
+    
+    @EventHandler
+    public void interact(PlayerInteractEvent event) {
+        if(this.isHarassed(event.getPlayer())) {
             event.setCancelled(true);
         }
     }
