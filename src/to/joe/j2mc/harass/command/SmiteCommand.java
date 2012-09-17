@@ -26,6 +26,7 @@ public class SmiteCommand extends MasterCommand {
             target = J2MC_Manager.getVisibility().getPlayer(args[0], null);
         } catch (final BadPlayerMatchException e) {
             sender.sendMessage(ChatColor.RED + e.getMessage());
+            return;
         }
         final boolean weather = target.getWorld().isThundering();
         //J2MC_Manager.getPermissions().setPermissions("j2mc.damage.take", true);
