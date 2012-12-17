@@ -10,7 +10,7 @@ import to.joe.j2mc.core.event.MessageEvent;
 import to.joe.j2mc.core.exceptions.BadPlayerMatchException;
 import to.joe.j2mc.harass.J2MC_Harass;
 
-public class HarassCommand extends MasterCommand {
+public class HarassCommand extends MasterCommand<J2MC_Harass> {
 
     public HarassCommand(J2MC_Harass harass) {
         super(harass);
@@ -30,11 +30,11 @@ public class HarassCommand extends MasterCommand {
             return;
         }
         String message;
-        if (!((J2MC_Harass) this.plugin).isHarassed(target)) {
-            ((J2MC_Harass) this.plugin).harass(target.getName());
+        if (!this.plugin.isHarassed(target)) {
+            this.plugin.harass(target.getName());
             message = ChatColor.AQUA + "[HARASS] Target Acquired: " + ChatColor.DARK_AQUA + target.getName() + ChatColor.AQUA + ". Thanks, " + sender.getName() + "!";
         } else {
-            ((J2MC_Harass) this.plugin).remove(target.getName());
+            this.plugin.remove(target.getName());
             message = ChatColor.AQUA + "[HARASS] Target Removed: " + ChatColor.DARK_AQUA + target.getName() + ChatColor.AQUA + ". Thanks, " + sender.getName() + "!";
         }
         J2MC_Manager.getCore().adminAndLog(message);

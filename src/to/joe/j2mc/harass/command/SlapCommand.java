@@ -12,7 +12,7 @@ import to.joe.j2mc.core.command.MasterCommand;
 import to.joe.j2mc.core.exceptions.BadPlayerMatchException;
 import to.joe.j2mc.harass.J2MC_Harass;
 
-public class SlapCommand extends MasterCommand {
+public class SlapCommand extends MasterCommand<J2MC_Harass> {
 
     public SlapCommand(J2MC_Harass harass) {
         super(harass);

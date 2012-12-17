@@ -15,13 +15,10 @@ import to.joe.j2mc.core.command.MasterCommand;
 import to.joe.j2mc.core.exceptions.BadPlayerMatchException;
 import to.joe.j2mc.harass.J2MC_Harass;
 
-public class WoofCommand extends MasterCommand{
-    
-    J2MC_Harass plugin;
-    
+public class WoofCommand extends MasterCommand<J2MC_Harass> {
+        
     public WoofCommand (J2MC_Harass harass){
         super(harass);
-        this.plugin = harass;
     }
     
     @Override

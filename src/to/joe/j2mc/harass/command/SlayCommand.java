@@ -10,7 +10,7 @@ import to.joe.j2mc.core.command.MasterCommand;
 import to.joe.j2mc.core.exceptions.BadPlayerMatchException;
 import to.joe.j2mc.harass.J2MC_Harass;
 
-public class SlayCommand extends MasterCommand {
+public class SlayCommand extends MasterCommand<J2MC_Harass> {
 
     public SlayCommand(J2MC_Harass harass) {
         super(harass);
