@@ -9,17 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.server.EntityChicken;
-import net.minecraft.server.Packet24MobSpawn;
-import net.minecraft.server.Packet60Explosion;
-import net.minecraft.server.Packet62NamedSoundEffect;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
@@ -87,12 +80,7 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
             final Location location = event.getBlockPlaced().getLocation();
             final Inventory i = event.getPlayer().getInventory();
             i.remove(event.getPlayer().getItemInHand().getType());
-            final EntityChicken bawk = new EntityChicken(((CraftWorld) event.getPlayer().getWorld()).getHandle());
-            bawk.setLocation(location.getX() + 0.5, location.getY(), location.getZ() + 0.5, location.getPitch(), location.getYaw());
-            final Packet24MobSpawn pack1 = new Packet24MobSpawn(bawk);
-            final Packet60Explosion pack2 = new Packet60Explosion(location.getX() + 0.5, location.getY() + 0.5, location.getZ() + 0.5, 10, new ArrayList<Block>(), null);
-            ((CraftPlayer) event.getPlayer()).getHandle().netServerHandler.sendPacket(pack1);
-            ((CraftPlayer) event.getPlayer()).getHandle().netServerHandler.sendPacket(pack2);
+            event.getPlayer().playSound(location, Sound.CHICKEN_IDLE, 3, 3);
             event.setCancelled(true);
         }
     }
@@ -155,8 +143,7 @@ public class J2MC_Harass extends JavaPlugin implements Listener {
             public void run() {
                 for (Player player : getServer().getOnlinePlayers()) {
                     if(isHarassed(player)) {
-                        Packet62NamedSoundEffect footstep = new Packet62NamedSoundEffect("step.grass", player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), 5, 3);
-                        ((CraftPlayer) player).getHandle().netServerHandler.sendPacket(footstep);
+                        player.playSound(player.getLocation(), Sound.STEP_GRASS, 5, 3);
                     }
                 }
             }
