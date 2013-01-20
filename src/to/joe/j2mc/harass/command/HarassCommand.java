@@ -32,9 +32,11 @@ public class HarassCommand extends MasterCommand<J2MC_Harass> {
         String message;
         if (!this.plugin.isHarassed(target)) {
             this.plugin.harass(target.getName());
+            J2MC_Manager.getPermissions().addFlag(target, 'H');
             message = ChatColor.AQUA + "[HARASS] Target Acquired: " + ChatColor.DARK_AQUA + target.getName() + ChatColor.AQUA + ". Thanks, " + sender.getName() + "!";
         } else {
             this.plugin.remove(target.getName());
+            J2MC_Manager.getPermissions().delFlag(target, 'H');
             message = ChatColor.AQUA + "[HARASS] Target Removed: " + ChatColor.DARK_AQUA + target.getName() + ChatColor.AQUA + ". Thanks, " + sender.getName() + "!";
         }
         J2MC_Manager.getCore().adminAndLog(message);
